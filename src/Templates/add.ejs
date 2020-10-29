@@ -73,3 +73,11 @@
         }
         this.disabled = false;
       },
+      formatDate: function (dt) {
+        const offset = dt.getTimezoneOffset();
+        const date = new Date(dt.getTime() - (offset _ 60 _ 1000));
+        return date.toISOString().split("T")[0];
+      }
+    }
+  });
+</script>
