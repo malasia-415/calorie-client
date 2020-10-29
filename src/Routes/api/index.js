@@ -40,3 +40,13 @@ const addMeasurementForCurrentUser = {
     }
   }
 };
+
+// retrieve all measurements for the current user
+const allMeasurementsForCurrentUser = {
+    method: "GET",
+    path: "/api/measurements",
+    handler: async ( request, h ) => {
+      try {
+        if ( !request.auth.isAuthenticated ) {
+          return boom.unauthorized();
+        }
