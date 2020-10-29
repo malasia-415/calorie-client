@@ -62,3 +62,14 @@
             weight: this.weight
           })
         });
+        if (response.status === 200) {
+          this.weight = undefined;
+          this.message = "Weight measurement added!";
+          // clear message after 2 seconds
+          setTimeout(() => this.message = "", 2000);
+        } else {
+          const json = await response.json();
+          this.errorMessage = `There was an error. ${json.error} - ${json.message}`;
+        }
+        this.disabled = false;
+      },
