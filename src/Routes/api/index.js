@@ -178,3 +178,11 @@ const updateMeasurementForCurrentUserById = {
         }
       }
     };
+
+    module.exports = [
+        addMeasurementForCurrentUser,
+        allMeasurementsForCurrentUser,
+        deleteMeasurementForCurrentUserById,
+        getMeasurementForCurrentUserById,
+        updateMeasurementForCurrentUserById
+      ];
