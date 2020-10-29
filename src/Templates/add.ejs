@@ -34,3 +34,14 @@
     </div>
 
     <script>
+        const app = new Vue({
+    el: "#app",
+    data() {
+      return {
+        measureDate: this.formatDate(new Date()),
+        weight: undefined,
+        disabled: false,
+        message: "",
+        errorMessage: ""
+      }
+    },
