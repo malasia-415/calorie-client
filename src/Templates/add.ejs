@@ -16,3 +16,21 @@
                 v-model.number="weight">
             </div>
           </div>
+
+          <div class="field is-grouped">
+            <div class="control">
+              <input type="submit" class="button is-link" value="Submit">
+            </div>
+            <div class="control">
+              <button class="button is-link is-light">Cancel</button>
+            </div>
+          </div>
+        </fieldset>
+      </form>
+      <div class="section">
+        <div v-if="message" class="notification is-success" v-text="message"></div>
+        <div v-if="errorMessage" class="notification is-danger" v-text="errorMessage"></div>
+      </div>
+    </div>
+
+    <script>
