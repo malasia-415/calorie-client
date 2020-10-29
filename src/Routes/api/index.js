@@ -165,3 +165,16 @@ const updateMeasurementForCurrentUserById = {
         return boom.serverUnavailable();
       }
     },
+    options: {
+        auth: { mode: "try" },
+        validate: {
+          params: joi.object( {
+            id: joi.number().integer()
+          } ),
+          payload: joi.object( {
+            measureDate: joi.date(),
+            weight: joi.number()
+          } )
+        }
+      }
+    };
