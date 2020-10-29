@@ -18,3 +18,25 @@ const addMeasurementForCurrentUser = {
         ( user_id, measure_date, weight )
         VALUES
         ( ${ userId }, ${ measureDate }, ${ weight } )
+
+        RETURNING
+            id
+            , measure_date AS "measureDate"
+            , weight`;
+      return res.count > 0 ? res[0] : boom.badRequest();
+    } catch ( err ) {
+      console.log( err );
+      return boom.serverUnavailable();
+    }
+  },
+
+  options: {
+    auth: { mode: "try" },
+    validate: {
+      payload: joi.object( {
+        measureDate: joi.date(),
+        weight: joi.number()
+      } )
+    }
+  }
+};
