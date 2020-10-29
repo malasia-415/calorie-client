@@ -87,3 +87,17 @@ const deleteMeasurementForCurrentUserById = {
             AND user_id = ${ userId }`;
       return res.count > 0 ? h.response().code( 204 ) : boom.notFound();
     }
+    catch( err ) {
+        console.log( err );
+        return boom.serverUnavailable();
+      }
+    },
+    options: {
+        auth: { mode: "try" },
+        validate: {
+          params: joi.object( {
+            id: joi.number().integer()
+          } )
+        }
+      }
+    };
