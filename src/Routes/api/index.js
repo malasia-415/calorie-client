@@ -126,3 +126,12 @@ const getMeasurementForCurrentUserById = {
       return boom.serverUnavailable();
     }
 },
+options: {
+    auth: { mode: "try" },
+    validate: {
+      params: joi.object( {
+        id: joi.number().integer().message( "id parameter must be number" )
+      } )
+    }
+  }
+};
