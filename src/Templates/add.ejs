@@ -1,0 +1,10 @@
+<div id="app">
+    <h1 class="title">Add Measurement</h1>
+    <form @submit.prevent="addWeight">
+      <fieldset :disabled="disabled">
+        <div class="field">
+          <label class="label">Date</label>
+          <div class="control">
+            <input class="input" type="date" placeholder="Text input" v-model.trim="measureDate">
+          </div>
+        </div>
