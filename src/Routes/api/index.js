@@ -101,3 +101,28 @@ const deleteMeasurementForCurrentUserById = {
         }
       }
     };
+
+    // get one measurement for the current user by id
+const getMeasurementForCurrentUserById = {
+    method: "GET",
+    path: "/api/measurements/{id}",
+    handler: async ( request, h ) => {
+      try {
+        if ( !request.auth.isAuthenticated ) {
+          return boom.unauthorized();
+        }
+        const userId = request.auth.credentials.profile.id;
+      const id = request.params.id;
+      const res = await h.sql`SELECT
+            id
+            , measure_date AS "measureDate"
+            , weight
+        FROM  measurements
+        WHERE user_id = ${ userId }
+            AND id = ${ id }`;
+      return res.count > 0 ? res[0] : boom.notFound();
+    } catch ( err ) {
+      console.log( err );
+      return boom.serverUnavailable();
+    }
+},
