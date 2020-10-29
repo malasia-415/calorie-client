@@ -50,3 +50,22 @@ const allMeasurementsForCurrentUser = {
         if ( !request.auth.isAuthenticated ) {
           return boom.unauthorized();
         }
+        const userId = request.auth.credentials.profile.id;
+      const measurements = await h.sql`SELECT
+            id
+            , measure_date AS "measureDate"
+            , weight
+        FROM  measurements
+        WHERE user_id = ${ userId }
+        ORDER BY
+            measure_date`;
+      return measurements;
+    } catch ( err ) {
+      console.log( err );
+      return boom.serverUnavailable();
+    }
+  },
+  options: {
+    auth: { mode: "try" }
+  }
+};
