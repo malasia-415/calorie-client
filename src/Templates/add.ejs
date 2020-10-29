@@ -45,3 +45,20 @@
         errorMessage: ""
       }
     },
+    methods: {
+      addWeight: async function (e) {
+        // disable form while submitting to API
+        this.disabled = true;
+        this.message = "";
+        this.errorMessage = "";
+        const response = await fetch("/api/measurements", {
+          method: "POST",
+          credentials: "same-origin",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            measureDate: this.measureDate,
+            weight: this.weight
+          })
+        });
