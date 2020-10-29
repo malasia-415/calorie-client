@@ -1,12 +1,44 @@
 "use strict";
 
-//which returns the text "hello world!" The module exports an array of routes
+const path = require( "path" );
+
+const auth = require( "./auth" );
+
 const home = {
   method: "GET",
   path: "/",
-  handler: ( request, h ) => {
-    return "hello world!, I will be rich!";
+  options: {
+    auth: {
+      mode: "try"
+    },
+    handler: ( request, h ) => {
+      return h.view( "index", { title: "Home" } );
+    }
   }
 };
 
-module.exports = [ home ];
+const staticAssets = {
+  method: "GET",
+  path: "/assets/{param_}",
+  handler: {
+    directory:{
+      path: path.join( __dirname, "..", "assets" )
+    }
+  },
+  options: { auth: false }
+};
+
+const error404 = {
+  method: "_",
+  path: "/{any*}",
+  handler: function ( request, h ) {
+    return h.view( "404", { title: "Not Found" } ).code( 404 );
+  },
+  options: { auth: false }
+};
+
+module.exports = [
+  home,
+  staticAssets,
+  error404
+].concat( auth );
