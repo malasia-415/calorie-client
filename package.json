@@ -1,0 +1,35 @@
+{
+  "name": "calorie-client",
+  "version": "1.0.0",
+  "description": "This app is being created to help users keep track of their calorie intake everyday  The code wil beupdated soon",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/malasia-415/calorie-client.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/malasia-415/calorie-client/issues"
+  },
+  "homepage": "https://github.com/malasia-415/calorie-client#readme",
+  "dependencies": {
+    "@hapi/bell": "^12.1.1",
+    "@hapi/boom": "^9.1.0",
+    "@hapi/cookie": "^11.0.2",
+    "@hapi/hapi": "^19.2.0",
+    "@hapi/inert": "^6.0.3",
+    "@hapi/joi": "^17.1.1",
+    "@hapi/vision": "^6.0.1",
+    "dotenv": "^8.2.0",
+    "ejs": "^3.1.5",
+    "postgres": "^1.0.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.6"
+  }
+}
