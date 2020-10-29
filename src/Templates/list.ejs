@@ -1,0 +1,31 @@
+<script src="https://unpkg.com/chart.js@2.8.0/dist/Chart.bundle.js"></script>
+<script src="https://unpkg.com/vue-chartkick@0.5.1"></script>
+<div id="app">
+  <h1 class="title">Measurements</h1>
+  <div class="section" v-if="errorMessage">
+    <div class="notification is-danger" v-text="errorMessage"></div>
+  </div>
+  <div v-if="fetching">Getting your measurements...</div>
+  <div v-if="hasData">
+    <line-chart :data="chartData" :min="chartMinimum"></line-chart>
+    <table class="table is-striped is-narrow">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Weight</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="m in measurements">
+          <td v-text="m.measureDate"></td>
+          <td v-text="m.weight"></td>
+          <td><button class="button is-danger is-light is-small" @click="remove(m)">Delete</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div v-if="noData">No measurements to display</div>
+</div>
+
+<script>
