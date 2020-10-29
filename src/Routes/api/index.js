@@ -69,3 +69,21 @@ const allMeasurementsForCurrentUser = {
     auth: { mode: "try" }
   }
 };
+
+// delete a measurement for the current user by id
+const deleteMeasurementForCurrentUserById = {
+    method: "DELETE",
+    path: "/api/measurements/{id}",
+    handler: async ( request, h ) => {
+      try {
+        if ( !request.auth.isAuthenticated ) {
+          return boom.unauthorized();
+        }
+        const userId = request.auth.credentials.profile.id;
+      const id = request.params.id;
+      const res = await h.sql`DELETE
+        FROM  measurements
+        WHERE id = ${ id }
+            AND user_id = ${ userId }`;
+      return res.count > 0 ? h.response().code( 204 ) : boom.notFound();
+    }
