@@ -135,3 +135,33 @@ options: {
     }
   }
 };
+
+// update a measurement for the current user by id
+const updateMeasurementForCurrentUserById = {
+    method: "PUT",
+    path: "/api/measurements/{id}",
+    handler: async ( request, h ) => {
+      try {
+        if ( !request.auth.isAuthenticated ) {
+          return boom.unauthorized();
+        }
+        const userId = request.auth.credentials.profile.id;
+        const id = request.params.id;
+        const { measureDate, weight } = request.payload;
+        const res = await h.sql`UPDATE measurements
+        SET measure_date = ${ measureDate }
+            , weight = ${ weight }
+        WHERE id = ${ id }
+        AND user_id = ${ userId }
+
+        RETURNING
+        id
+        , measure_date AS "measureDate"
+        , weight`;
+      return res.count > 0 ? res[0] : boom.notFound();
+    }
+    catch( err ) {
+        console.log( err );
+        return boom.serverUnavailable();
+      }
+    },
