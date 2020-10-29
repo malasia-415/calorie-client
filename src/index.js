@@ -3,6 +3,7 @@
 const dotenv = require( "dotenv" );
 const Hapi = require( "@hapi/hapi" );
 
+const plugins = require( "./plugins" );
 const routes = require( "./routes" );
 
 //The createServer() function creates an instance of the hapi server based on the 
@@ -12,6 +13,8 @@ const createServer = async () => {
     port: process.env.PORT || 8080,
     host: process.env.HOST || "localhost"
   } );
+
+  await plugins.register( server );
 
   server.route( routes );
 

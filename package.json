@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "initdb": "node tools/initdb.js",
     "dev": "nodemon --watch src -e ejs,js src/index.js"
   },
   "repository": {
